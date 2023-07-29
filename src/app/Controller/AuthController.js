@@ -6,6 +6,9 @@ const dotenv = require('dotenv');
 dotenv.config();
 let refreshTokens = [];
 const AuthController = {
+    send: (req,res)=>{
+        res.send('THis is auth')
+    },
     // register
     registerUser: async(req,res) => {
        try{
