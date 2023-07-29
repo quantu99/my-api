@@ -20,7 +20,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/v1/auth', authRoute);
 app.use('/v1/user',userRoute);
 app.use('/v1/products',productsHandleRouter)
-
+app.get('/',(req,res)=>{
+    res.send('Hello')
+})
 app.listen(PORT || 5000, ()=>{
     console.log(`This app is running on http://localhost:${PORT}`)
 })
