@@ -2,6 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 let Products = require('./Products')
 let User = new Schema({
+    firstname:{
+    type:String
+    },
+    lastname:{
+    type:String
+    },
+    address:{
+    type:String
+    },
     username: 
     {type:String,
      require:true,
