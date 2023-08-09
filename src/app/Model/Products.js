@@ -18,6 +18,7 @@ let Products = new Schema({
     },
     type:[type= String, require=true],
     color:{type:String,require:true},
+    description:{type:String, require: true},
     user:{
         type: mongoose.Types.ObjectId,
         ref:"User"

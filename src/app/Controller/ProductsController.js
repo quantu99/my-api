@@ -6,11 +6,6 @@ const ProductsController = {
         try{
             const newProduct = await new Products(req.body)
             const product = await newProduct.save();
-            // Add the product to cart of user
-            if(req.body.user){
-                const user = User.findById(req.body.user)
-                await user.updateOne({$push: { cart: product._id }})
-            }
             return res.status(200).json(product) 
         }
         catch(err){
