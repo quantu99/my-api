@@ -36,7 +36,15 @@ const ProductsController = {
     updateProduct: async(req,res)=>{
         try{
             const product = await Products.findById(req.params.id)
-            await product.updateOne({$set: req.body})
+            await product.updateOne({$set: {
+                name: req.body.name,
+                type:req.body.type,
+                color:req.body.type,
+                price:req.body.price,
+                imageUrl:req.body.imageUrl,
+                imageUrl2:req.body.imageUrl2,
+                description:req.body.description
+            }})
             res.status(200).json('Update successful')
         }
         catch(err){
