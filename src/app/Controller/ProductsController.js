@@ -39,7 +39,7 @@ const ProductsController = {
             await product.updateOne({$set: {
                 name: req.body.name,
                 type:req.body.type,
-                color:req.body.type,
+                color:req.body.color,
                 price:req.body.price,
                 imageUrl:req.body.imageUrl,
                 imageUrl2:req.body.imageUrl2,
