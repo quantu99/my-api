@@ -82,6 +82,15 @@ const ProductsController = {
         catch(err){
         return res.status(500).json(err)
         }
+    },
+    destroyProduct:async(req,res)=>{
+        try{
+            await Products.findByIdAndDelete(req.params.id)
+            return res.status(200).json('destroy successful')
+        }
+        catch(err){
+            return res.status(500).json(err)
+        }
     }
 }
 module.exports = ProductsController
