@@ -57,7 +57,7 @@ const AuthController = {
     // login
     loginUser: async(req,res)=>{
        try{
-        const user = await User.findOne({username: req.body.username})
+        const user = await User.findOne({username: req.body.username}).populate('cart')
         if(!user){
             return res.status(404).json('Wrong username')
         }
