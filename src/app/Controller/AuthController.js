@@ -134,7 +134,7 @@ const AuthController = {
 
     getCart: async (req, res) => {
         try {
-            const user = await User.findById(req.params.id);
+            const user = await User.findById(req.params.id).populate('cart');
             if (user) {
                 const cart = user.cart;
                 return res.status(200).json(cart);
