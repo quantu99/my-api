@@ -130,6 +130,19 @@ const AuthController = {
         catch(err){
             res.status(500).json(err)
         }
+    },
+
+    getCart: async (req, res) => {
+        try {
+            const user = await User.findById(req.params.id);
+            if (user) {
+                const cart = user.cart;
+                return res.status(200).json(cart);
+            }
+            return res.status(404).json({ message: "User not found" });
+        } catch (err) {
+            return res.status(500).json(err);
+        }
     }
 }
 module.exports = AuthController;

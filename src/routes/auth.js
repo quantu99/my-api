@@ -13,5 +13,6 @@ router.post('/refresh', authController.requestRefreshToken);
 router.post('/logout', middlewareController.verifyToken, authController.logoutUser);
 // update info
 router.put('/:id',middlewareController.verifyToken, authController.updateInfo)
+router.get('/cart/:id',authController.getCart)
 router.get('/',authController.send)
 module.exports = router;
