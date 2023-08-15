@@ -15,5 +15,7 @@ router.post('/logout', middlewareController.verifyToken, authController.logoutUs
 router.put('/:id',middlewareController.verifyToken, authController.updateInfo)
 // get user cart
 router.get('/cart/:id',authController.getCart)
+// get user wishlist
+router.get('/wish/:id',authController.getWish)
 router.get('/',authController.send)
 module.exports = router;
