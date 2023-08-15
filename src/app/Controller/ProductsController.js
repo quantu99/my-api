@@ -98,6 +98,53 @@ const ProductsController = {
           return res.status(500).json('Internal server error');
         }
       },
+    addProductToWish: async(req,res)=>{
+        try{
+            const product = await Products.findById(req.params.id)
+            await product.updateOne({$set:{
+                user: req.body.user
+            }})
+            if(req.body.user){
+                const user = User.findById(req.body.user)
+                await user.updateOne({$push: { wish: product._id }})
+            }
+            return res.status(200).json('add successful') 
+        }
+        catch(err){
+            return res.status(500).json(err)
+        }
+    },
+    deleteProductFromWish: async (req, res) => {
+        try {
+          const product = await Products.findById(req.params.id);
+          
+          if (!product) {
+            return res.status(404).json('Product not found');
+          }
+          
+          if (req.body.user) {
+            const user = await User.findById(req.body.user);
+            
+            if (!user) {
+              return res.status(404).json('User not found');
+            }
+            
+            const wish = user.wish;
+            const productIndex = wish.findIndex(item => item.toString() === req.params.id);
+      
+            if (productIndex !== -1) {
+              wish.splice(productIndex, 1);
+              await user.save();
+              return res.status(200).json('Update successful');
+            }
+          }
+          
+          return res.status(400).json('Invalid request');
+        } catch (error) {
+          console.error(error);
+          return res.status(500).json('Internal server error');
+        }
+      },
     destroyProduct:async(req,res)=>{
         try{
             await Products.findByIdAndDelete(req.params.id)

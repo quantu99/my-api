@@ -143,6 +143,18 @@ const AuthController = {
         } catch (err) {
             return res.status(500).json(err);
         }
+    },
+    getWish: async (req, res) => {
+        try {
+            const user = await User.findById(req.params.id).populate('wish');
+            if (user) {
+                const wish = user.wish;
+                return res.status(200).json(wish);
+            }
+            return res.status(404).json({ message: "User not found" });
+        } catch (err) {
+            return res.status(500).json(err);
+        }
     }
 }
 module.exports = AuthController;
