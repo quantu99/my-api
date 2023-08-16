@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-let Products = require('./Products')
 let User = new Schema({
     firstname:{
     type:String
@@ -36,7 +35,14 @@ let User = new Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref:"Products"
         }
-    ]
+    ],
+    order: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Products"
+        }],
+        default: []
+    }
 },
 {
     timestamps:true

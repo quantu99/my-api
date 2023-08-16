@@ -17,5 +17,9 @@ router.put('/:id',middlewareController.verifyToken, authController.updateInfo)
 router.get('/cart/:id',authController.getCart)
 // get user wishlist
 router.get('/wish/:id',authController.getWish)
+// order
+router.put('/order/:id',authController.addToOrder)
+// getOrder
+router.get('/order/:id',authController.getOrder)
 router.get('/',authController.send)
 module.exports = router;

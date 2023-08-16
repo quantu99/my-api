@@ -144,6 +144,18 @@ const AuthController = {
             return res.status(500).json(err);
         }
     },
+    addToOrder: async (req, res) => {
+        try {
+          const user = await User.findById(req.params.id);
+          if(user){
+            const cart = user.cart
+            await user.updateOne({$push: { order: cart }})
+            return res.status(200).json('order successful');
+          }
+        } catch (err) {
+          return res.status(500).json(err);
+        }
+      },
     getWish: async (req, res) => {
         try {
             const user = await User.findById(req.params.id).populate('wish');
@@ -154,6 +166,21 @@ const AuthController = {
             return res.status(404).json({ message: "User not found" });
         } catch (err) {
             return res.status(500).json(err);
+        }
+    },
+    
+    getOrder:async(req,res)=>{
+        try{
+          const user = await User.findById(req.params.id).populate('order');
+            if(!user){
+                return res.status(404).json('User not found')}
+            else if(user){
+                const order = user.order;
+                return res.status(200).json(order);
+            }
+        }
+        catch(err){
+            return res.status(500).json(err)
         }
     }
 }
