@@ -42,6 +42,25 @@ let User = new Schema({
             ref: "Products"
         }],
         default: []
+    },
+    phone:{
+    type:Number
+    },
+    cardNumber:{
+    type:Number,
+    minLength:9,
+    maxLength: 18
+    },
+    cardMonth:{
+    type:Number
+    },
+    cardYear:{
+        type:Number
+    },
+    cvv:{
+        type:Number,
+        minLength:3,
+        maxLength:4
     }
 },
 {

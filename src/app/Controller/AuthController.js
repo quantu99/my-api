@@ -21,7 +21,12 @@ const AuthController = {
             address:req.body.address,
             username: req.body.username,
             email: req.body.email,
-            password: hashed
+            password: hashed,
+            phone: req.body.phone,
+            cardNumber:req.body.cardNumber,
+            cardMonth:req.body.cardMonth,
+            cardYear:req.body.cardYear,
+            cvv:req.body.cvv
         })
         // Save user
         const user = await newUser.save()
@@ -182,6 +187,23 @@ const AuthController = {
         catch(err){
             return res.status(500).json(err)
         }
-    }
+    },
+    updateInfoOrder: async(req,res)=>{
+        try{
+            const user = await User.findById(req.params.id)
+            await user.updateOne({$set: {
+                email: req.body.email,
+                phone: req.body.phone,
+                cardNumber:req.body.cardNumber,
+                cardMonth:req.body.cardMonth,
+                cardYear:req.body.cardYear,
+                cvv:req.body.cvv
+            }})
+            res.status(200).json('Update info order successful')
+        }
+        catch(err){
+            res.status(500).json({message:err.message})
+        }
+    } 
 }
 module.exports = AuthController;

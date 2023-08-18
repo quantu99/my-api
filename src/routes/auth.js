@@ -21,5 +21,7 @@ router.get('/wish/:id',authController.getWish)
 router.put('/order/:id',authController.addToOrder)
 // getOrder
 router.get('/order/:id',authController.getOrder)
+// update info order
+router.put('/order/info/:id',authController.updateInfoOrder)
 router.get('/',authController.send)
 module.exports = router;
