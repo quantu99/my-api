@@ -194,6 +194,7 @@ const AuthController = {
             await user.updateOne({$set: {
                 email: req.body.email,
                 phone: req.body.phone,
+                address:req.body.address,
                 cardNumber:req.body.cardNumber,
                 cardMonth:req.body.cardMonth,
                 cardYear:req.body.cardYear,
