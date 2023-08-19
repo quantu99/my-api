@@ -154,7 +154,7 @@ const AuthController = {
           const user = await User.findById(req.params.id);
           if(user){
             const cart = user.cart
-            await user.updateOne({$push: { order: cart }})
+            await user.updateOne({ $push: { order: cart }, $set: { cart: [] } });
             return res.status(200).json('order successful');
           }
         } catch (err) {
