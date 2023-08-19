@@ -9,6 +9,7 @@ const database = require('./database');
 database.connect();
 const authRoute = require('./routes/auth');
 const userRoute = require('./routes/user');
+const orderRoute = require('./routes/order')
 const productsHandleRouter = require('./routes/productsHandle')
 const app = express();
 app.use(cors());
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 // Route
 app.use('/v1/auth', authRoute);
 app.use('/v1/user',userRoute);
+app.use('/v1/order', orderRoute)
 app.use('/v1/products',productsHandleRouter)
 app.get('/',(req,res)=>{
     res.send('Hello')
