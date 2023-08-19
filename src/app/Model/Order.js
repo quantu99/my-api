@@ -10,13 +10,17 @@ let Order = new Schema({
   products: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Product',
+      ref: 'Products',
       required: true
     }
   ],
   orderDate: {
     type: Date,
     default: Date.now
+  },
+  orderProgress:{
+    type:Boolean,
+    default:false
   }
 });
 
