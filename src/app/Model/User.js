@@ -61,6 +61,10 @@ let User = new Schema({
         type:Number,
         minLength:3,
         maxLength:4
+    },
+    orderProgress:{
+        type:Boolean,
+        default:false
     }
 },
 {

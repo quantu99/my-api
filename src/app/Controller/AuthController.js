@@ -198,7 +198,8 @@ const AuthController = {
                 cardNumber:req.body.cardNumber,
                 cardMonth:req.body.cardMonth,
                 cardYear:req.body.cardYear,
-                cvv:req.body.cvv
+                cvv:req.body.cvv,
+                orderProgress:req.body.orderProgress
             }})
             res.status(200).json('Update info order successful')
         }
