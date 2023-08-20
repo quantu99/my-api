@@ -1,5 +1,6 @@
 const User = require('../Model/User');
 const Products = require('../Model/Products')
+const Order = require('../Model/Order')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
@@ -174,18 +175,31 @@ const AuthController = {
         }
     },
     
-    getOrder:async(req,res)=>{
+    // getOrder:async(req,res)=>{
+    //     try{
+    //       const user = await User.findById(req.params.id).populate('order');
+    //         if(!user){
+    //             return res.status(404).json('User not found')}
+    //         else if(user){
+    //             const order = user.order;
+    //             return res.status(200).json(order);
+    //         }
+    //     }
+    //     catch(err){
+    //         return res.status(500).json(err)
+    //     }
+    // },
+    getOrder: async(req,res)=>{
         try{
-          const user = await User.findById(req.params.id).populate('order');
-            if(!user){
-                return res.status(404).json('User not found')}
-            else if(user){
-                const order = user.order;
+            const user = await User.findById(req.params.id).populate('order')
+            if(user){
+                const order = await Order.findOne({ userId: req.body.userId }).populate('user').populate('products');
+                // await user.updateOne({$push: { order: order._id }})
                 return res.status(200).json(order);
             }
         }
         catch(err){
-            return res.status(500).json(err)
+        return res.status(500).json({message:err.message})
         }
     },
     updateInfoOrder: async(req,res)=>{

@@ -39,7 +39,7 @@ let User = new Schema({
     order: {
         type: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Products"
+            ref: "Order"
         }],
         default: []
     },
