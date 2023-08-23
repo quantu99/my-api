@@ -25,6 +25,10 @@ let Order = new Schema({
   orderProcess:{
     type: String,
     default:"not verified"
+  },
+  getItem:{
+    type:Boolean,
+    default:false
   }
 });
 module.exports = mongoose.model('Order', Order);

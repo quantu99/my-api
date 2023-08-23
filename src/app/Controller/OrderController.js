@@ -78,6 +78,32 @@ const OrderController = {
         catch{err}{
           res.status(500).json({message:err.message})
         }
+      },
+      deleteOrder: async(req,res)=>{
+        try{
+          await Order.findByIdAndDelete(req.params.id)
+          return res.status(200).json('delete successful')
+        }
+        catch(err){
+        return res.status(500).json({message:err.message})
+        }
+      },
+      verifyGetItem:async(req,res)=>{
+        try{
+          const order = await Order.findById(req.params.id)
+          if(order){
+            await order.updateOne({$set:{
+             getItem: true
+            }})
+            return res.status(200).json('get item success')
+          }
+          else{
+            return res.status(404).json('order is not found')
+          }
+        }
+        catch(err){
+          return res.status(500).json({message:err.message})
+        }
       }
 }
 module.exports = OrderController;
