@@ -21,7 +21,9 @@ let Order = new Schema({
   orderProgress:{
     type:Boolean,
     default:false
+  },
+  orderProcess:{
+    type: String,
   }
 });
-
 module.exports = mongoose.model('Order', Order);

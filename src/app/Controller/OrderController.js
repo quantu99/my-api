@@ -48,16 +48,34 @@ const OrderController = {
         try{
           const order = await Order.findById(req.params.id);
           if(order){
-            await Order.updateOne({$set:{
-              orderProgress: true
+            await order.updateOne({$set:{
+              orderProgress: true,
+              orderProcess: 'Order Processed',
             }})
             return res.status(200).json('verify order success')
           }
           else{
-            return res.status(404).json('Order does not exist');
+            return res.status(404).json('Order is not found');
           }
         }
         catch(err){
+          res.status(500).json({message:err.message})
+        }
+      },
+      editOrderProcess: async(req,res)=>{
+        try{
+          const order = await Order.findById(req.params.id)
+          if(order){
+            await order.updateOne({$set:{
+              orderProcess: req.body.orderProcess
+            }})
+          return res.status(200).json('Edit order process successful')
+          }
+          else{
+            return res.status(404).json('Order is not found')
+          }
+        }
+        catch{err}{
           res.status(500).json({message:err.message})
         }
       }
