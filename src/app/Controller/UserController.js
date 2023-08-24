@@ -24,7 +24,7 @@ const UserController = {
     // get user detail
     getUser: async(req,res)=>{
         try{
-            const user = await User.findById(req.params.id).populate('cart')
+            const user = await User.findById(req.params.id).populate('cart').populate('orderHistory')
             res.status(200).json(user)
         }
         catch(err){

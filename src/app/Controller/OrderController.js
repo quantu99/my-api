@@ -1,5 +1,6 @@
 const Order = require('../Model/Order')
 const User = require('../Model/User')
+const OrderHistory = require('../Model/OrderHistory')
 const OrderController = {
     addNewOrder:  async (req, res) => {
         try {
@@ -104,18 +105,40 @@ const OrderController = {
           return res.status(500).json({message:err.message})
         }
       },
+      // pushOrderToHistory: async(req,res)=>{
+      //   try{
+      //     const user = await User.findById(req.body.userId);
+      //     const order = await Order.findById(req.params.id);
+      //     if(order){
+      //       await user.updateOne({$push: { orderHistory: order._id}})
+      //       await Order.findByIdAndDelete(req.params.id);
+      //       return res.status(200).json('push to history successful')
+      //     }
+      //   }
+      //   catch(err){
+      //     return res.status(500).json({message:err.message})
+      //   }
+      // },
       pushOrderToHistory: async(req,res)=>{
         try{
-          const user = await User.findById(req.body.userId);
           const order = await Order.findById(req.params.id);
-          if(order && order.getItem){
-            await user.updateOne({$push: { orderHistory: order._id}})
-            await Order.findByIdAndDelete(req.params.id);
-            return res.status(200).json('push to history successful')
+          if(order){
+            const orderHistory = new OrderHistory({
+              order: order._id,
+              user: order.user,
+              products: order.products,
+              orderDate: order.orderDate,
+              orderProgress: order.orderProgress,
+              orderProcess: order.orderProcess,
+              getItem: order.getItem
+            });
+            await orderHistory.save();
+            await Order.findByIdAndDelete(req.params.id);      
+            return res.status(200).json('Pushed to history successfully');
           }
         }
         catch(err){
-          return res.status(500).json({message:err.message})
+          return res.status(500).json({message: err.message});
         }
       }
 }
