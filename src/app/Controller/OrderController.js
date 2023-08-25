@@ -50,7 +50,7 @@ const OrderController = {
           if(order){
             await order.updateOne({$set:{
               orderProgress: true,
-              orderProcess: 'Order Processed',
+              orderProcess: 'order processed',
             }})
             return res.status(200).json('verify order success')
           }
