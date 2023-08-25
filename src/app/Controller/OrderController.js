@@ -20,7 +20,7 @@ const OrderController = {
       },
       getAllOrder: async(req,res)=>{
         try{
-            const allOrder = await Order.find();
+            const allOrder = await Order.find().populate('user').populate('products');
             return res.status(200).json(allOrder)
         }
         catch(err){
@@ -105,20 +105,6 @@ const OrderController = {
           return res.status(500).json({message:err.message})
         }
       },
-      // pushOrderToHistory: async(req,res)=>{
-      //   try{
-      //     const user = await User.findById(req.body.userId);
-      //     const order = await Order.findById(req.params.id);
-      //     if(order){
-      //       await user.updateOne({$push: { orderHistory: order._id}})
-      //       await Order.findByIdAndDelete(req.params.id);
-      //       return res.status(200).json('push to history successful')
-      //     }
-      //   }
-      //   catch(err){
-      //     return res.status(500).json({message:err.message})
-      //   }
-      // },
       pushOrderToHistory: async(req,res)=>{
         try{
           const order = await Order.findById(req.params.id);

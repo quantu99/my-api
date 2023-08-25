@@ -179,7 +179,6 @@ const AuthController = {
             const user = await User.findById(req.params.id)
             if(user){
                 const order = await Order.find({ user: user._id }).populate('user').populate('products');
-                // await user.updateOne({$push: { order: order._id }})
                 return res.status(200).json(order);
             }
         }
