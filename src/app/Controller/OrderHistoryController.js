@@ -11,7 +11,7 @@ const OrderHistoryController = {
     },
     getOrderHistoryDetail: async(req,res)=>{
         try{
-            const orderHistoryDetail = await OrderHistory.findById(req.params.id);
+            const orderHistoryDetail = await OrderHistory.findById(req.params.id).populate('user').populate('products');
             return res.status(200).json(orderHistoryDetail);
         }
         catch(err){
