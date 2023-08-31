@@ -12,6 +12,7 @@ const userRoute = require('./routes/user');
 const orderRoute = require('./routes/order')
 const orderHistoryRoute = require('./routes/orderHistory')
 const productsHandleRouter = require('./routes/productsHandle')
+const messRoute = require('./routes/mess')
 const app = express();
 app.use(cors());
 app.use(cookieParser())
@@ -24,6 +25,7 @@ app.use('/v1/user',userRoute);
 app.use('/v1/order', orderRoute)
 app.use('/v1/order-history',orderHistoryRoute)
 app.use('/v1/products',productsHandleRouter)
+app.use('/v1/message',messRoute)
 app.get('/',(req,res)=>{
     res.send('Hello')
 })

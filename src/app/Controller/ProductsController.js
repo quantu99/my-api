@@ -94,7 +94,6 @@ const ProductsController = {
           
           return res.status(400).json('Invalid request');
         } catch (error) {
-          console.error(error);
           return res.status(500).json('Internal server error');
         }
       },

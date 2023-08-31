@@ -2,6 +2,7 @@ const User = require('../Model/User');
 const Products = require('../Model/Products')
 const Order = require('../Model/Order')
 const OrderHistory = require('../Model/OrderHistory')
+const Message = require('../Model/Message')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
@@ -199,6 +200,18 @@ const AuthController = {
         return res.status(500).json({message:err.message})
 
       } 
+    },
+    getMessage: async(req,res)=>{
+        try{
+            const user =  await User.findById(req.params.id)
+            if(user){
+                const message = await Message.find({user: user._id}).populate('user')
+                return res.status(200).json(message)
+            }
+        }
+        catch(err){
+        return res.status(500).json({message:err.message})
+        }
     },
     updateInfoOrder: async(req,res)=>{
         try{

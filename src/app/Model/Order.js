@@ -25,6 +25,7 @@ let Order = new Schema({
   orderProcess:{
     type: String,
     default:"not verified"
+    // not verified, order processed,order shipped, order is shipping,order arrived
   },
   getItem:{
     type:Boolean,

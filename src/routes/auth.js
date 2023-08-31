@@ -23,6 +23,8 @@ router.put('/order/:id',authController.addToOrder)
 router.get('/order/:id',authController.getOrder)
 // getOrderHistory
 router.get('/order-history/:id',authController.getOrderHistory)
+// get my message
+router.get('/message/:id',authController.getMessage)
 // update info order
 router.put('/order/info/:id',authController.updateInfoOrder)
 router.get('/',authController.send)
